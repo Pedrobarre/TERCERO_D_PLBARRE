@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+{% block titulo %} eliminar {% endblock %}
+{% block body %}
+    <form method="POST">{% csrf_token %}
+        <h2 style="text-align: center">¿Desea eliminar el siguiente Cliente {{ cliente.nombre }} ?</h2>
+        <div style="text-align: center"><i class="fa-solid fa-user fa-5x" style="color: red"></i></div>
+        <br>
+        <div class="trans">
+	     <a><button type="submit" class="btn btn-danger">Eliminar</button></a>
+        <a href="{% url 'listado_clientes' %}" class="btn btn-primary btn-sm" >Cancelar </a>
+		</div>
+    </form>
+{% endblock %}

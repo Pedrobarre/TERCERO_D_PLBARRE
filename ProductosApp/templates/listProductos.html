@@ -1,0 +1,98 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block titulo %}
+Listado de Usuarios
+{% endblock titulo %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/lib/datatable/dataTables.bootstrap.min.css' %}">
+{% endblock extra_css %}
+{% block body %}
+    <section id="container">
+
+		<h1> <i class="fa-solid fa-capsules fa-2x" style="color: #00aced" ></i> Lista de Productos</h1>
+		<a href="{% url 'RegistarProductos' %}" class="btn_new"> Registar Producto</a>
+
+		<form action="" method="get" class="form_search">
+			<input type="text" name="busqueda" id="busqueda" value="{{ request.GET.busqueda }}" placeholder="Buscar" >
+			 <button type="submit" class="btn_search" ><i class="fas fa-search"></i></button>
+		</form>
+    <table id="tabla_trabajadores" class="table">
+                <thead>
+                    <tr>
+                        <th class="centered" >#</th>
+                        <th class="centered" >CODIGO </th>
+                        <th class="centered" >NOMBRE</th>
+                        <th class="centered">PRECIO COMPRA</th>
+                        <th class="centered">PRECIO VENTAS</th>
+                        <th class="centered" >STOCK</th>
+                         <th class="centered" >CLASIFICACION</th>
+                        <th class="centered" >DISTRIBUIDORA</th>
+                         <th class="centered" >CATEGORIAS</th>
+                         <th class="centered" >IMAGEN</th>
+                          <th class="centered" >ESTADO</th>
+                        <th class="centered" >OPCIONES</th>
+                    </tr>
+                </thead>
+               <tbody id="table_programer">
+               {% for i in entity %}
+                  <tr>
+                  <td class="centered" >{{ i.id }}</td>
+                  <td class="centered" >{{ i.codigo | upper }}</td>
+                  <td class="centered" >{{ i.producto | upper }}</td>
+                  <td class="centered" >$ {{ i.precio_compra }}</td>
+                  <td class="centered" >$ {{ i.precio }}</td>
+                   <td class="centered" >{{ i.cantidad }} Unidades</td>
+                  <td class="centered" >{{ i.clasificacion |upper }}</td>
+                  <td class="centered" >{{ i.distribuiodra | upper}}</td>
+                  <td class="centered" >{{ i.categorias |upper }}</td>
+                  {% if i.imagen %}
+                   <td class="centered" >
+                       <img src="{{ i.imagen.url }}" style="width: 50px; height: 50px" alt="no imagen">
+                   </td>
+                      {% else %}
+                        <td class="centered" >
+                       <img src="" style="width: 50px; height: 50px" alt="no imagen">
+                   </td>
+                  {% endif %}
+                  <td class="centered" >
+                      {% if i.estado == 1 %}
+                          <i class='fa-solid fa-check fa-xl' style='color: green'></i>
+                      {% else %}
+                          <i class='fa-solid fa-xmark fa-xl' style='color: red'></i>
+                      {% endif %}
+                  </td>
+                  {% if i.estado == 1 %}
+                 <th  class="centered" >
+                     <a href="{% url 'EditarProducto' i.id %}">
+                     <button class="btn btn-outline-primary btn-sm">
+                     <i class="fas fa-user-pen"></i>
+                    </button>
+                 </a>
+                     <a href="{% url 'EliminarProducto' i.id %}">
+                          <button class="btn btn-outline-danger btn-sm">
+                          <i class="fas fa-trash"></i></button>
+                     </a>
+                 </th>
+                      {% else %}
+                      <th  class="centered" >
+                       <a href="{% url 'EditarProducto' i.id %}">
+                         <button class="btn btn-outline-primary btn-sm">
+                         <i class="fas fa-user-pen"></i>
+                        </button>
+                       </a>
+                      </th>
+                  {% endif %}
+                </tr>
+              {% endfor %}
+               </tbody>
+            </table>
+     <div>
+                {% include 'paginator.html' %}
+            </div>
+	</section>
+{% endblock body %}
+{% block extrajs %}
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="{% static 'js/lib/data-table/dataTables.bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/usuarios/index.js' %}"></script>
+{% endblock extrajs %}

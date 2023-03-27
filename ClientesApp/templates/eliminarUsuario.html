@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+{% block titulo %} eliminar {% endblock %}
+{% block body %}
+    <form method="POST">{% csrf_token %}
+         <h2 style="text-align: center">¿Desea eliminar el sisguiente Usuario?</h2>
+        <h2 style="text-align: center">Nombres: {{ usuario.nombres }}</h2>
+        <h2 style="text-align: center">Usuario: {{ usuario.usuario }}</h2>
+        {% if usuario.imagen %}
+        <div style="text-align: center"><img src="{{ usuario.imagen.url }}" style="width: 200px; height: 200px" alt=" imagen"></div>
+            {% else %}
+            <div style="text-align: center"><img src="" style="width: 200px; height: 200px" alt="iamgen"></div>
+        {% endif %}
+        <br>
+        <div class="trans">
+	    <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a href="{% url 'listUsuarios' %}" class="btn btn-primary">Cancelar </a>
+		</div>
+    </form>
+{% endblock %}

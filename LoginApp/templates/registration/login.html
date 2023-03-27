@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login y Register</title>
+     <meta name="description" content="Ela Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+<h2>Bienvenidos</h2>
+<div class="container" id="container">
+	<div class="form-container sign-up-container">
+		 <form method="POST" action="/RegistrarUsuario/" class="formulario__register">
+              {% csrf_token %}
+			<h1>Registro</h1>
+			<div class="social-container">
+				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+			</div>
+			<input type="text" name="txtnombre" id="txtnombre" placeholder="Nombre completo" >
+            <input type="text" name="txtcorreo" id="txtcorreo" placeholder="Correo Electronico" >
+            <input type="text" name="txtusaurio" id="txtusuario" placeholder="Usuario" >
+            <input type="password" name="txtcontrraseña" id="txtcontraseña" placeholder="Contraseña" >
+			<button>Registrarse</button>
+		</form>
+	</div>
+	<div class="form-container sign-in-container">
+		 <form class="login-form" method="POST" action="/login/">
+                {% csrf_token %}
+             {% if messages %}
+                     {% for message in messages %}
+                         <div class="alert alert-dismissible alert-danger">
+                            <strong class="text-dark">{{ message }}</strong>
+                        </div>
+                    {% endfor %}
+                  {% endif %}
+			<h1>Iniciar Seccion</h1>
+			<div class="social-container">
+				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+			</div>
+			<span>Usa tu cuenta si ya la tienes </span>
+			 <input type="text" name="username" id="username" placeholder="ingrese su usurio">
+             <input type="password" name="password" id="password" placeholder="ingrese su contraseña">
+			<a href="#">¿Olvidaste tu contraseña?</a>
+			<button type="submit" >Inicio Seccion</button>
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>¡Bienvenido de nuevo!</h1>
+				<p>Para mantenerse conectado con nosotros, inicie sesión con su USUARIO Y CONTRASEÑA</p>
+				<button class="ghost" id="signIn">Inicio de Seccion</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>HOLA, Bienvenidos!</h1>
+				<p>Ingrese sus datos personales </p>
+				<button class="ghost" id="signUp">REGISTRARSE</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<footer>
+	<p>
+		Creado con
+        <i class="fa-solid fa-x-ray"></i></i>por
+		<a target="_blank" href="https://florin-pop.com">Pedro Barre 3 "D"</a>
+	</p>
+</footer>
+<script src="{% static 'js/login.js' %}"></script>
+</body>
+</html>

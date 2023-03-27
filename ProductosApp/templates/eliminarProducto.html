@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+{% block titulo %} eliminar {% endblock %}
+{% block body %}
+    <form method="POST">{% csrf_token %}
+        <h2 style="text-align: center">¿Desea eliminar el siguiente Producto {{ producto.producto }} ?</h2>
+         {% if producto.imagen %}
+        <div style="text-align: center"><img src="{{ producto.imagen.url }}" style="width: 200px; height: 200px" alt=" imagen"></div>
+            {% else %}
+            <div style="text-align: center"><img src="" style="width: 200px; height: 200px" alt="no imagen"></div>
+        {% endif %}
+        <br>
+        <div class="trans">
+	     <a><button type="submit" class="btn btn-danger">Eliminar</button></a>
+        <a href="{% url 'listProductos' %}" class="btn btn-primary btn-sm" >Cancelar </a>
+		</div>
+    </form>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'index.html' %}
+{% block titulo %}bienvenidos{% endblock %}
+{% block body  %}
+    <br>
+    <br>
+    <h1 style="text-align: center">BIENVENIDOS</h1>
+     <div class="cardBox">
+                <div class="card">
+                    <div>
+                       <div class="numbers">{{ total_producto }}</div>
+                        <div class="cardName">Medicinas</div>
+                    </div>
+
+                    <div class="iconBx">
+                      <i class="fa-solid fa-pills"></i>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="numbers">{{ total_usuarios }}</div>
+                        <div class="cardName">Usuarios</div>
+                    </div>
+
+                    <div class="iconBx">
+                       <ion-icon name="person-circle-outline"></ion-icon>
+                    </div>
+                </div>
+             <div class="card">
+                    <div>
+                        <div class="numbers">{{ total_producto_agotado }}</div>
+                        <div class="cardName">Agotados</div>
+                    </div>
+
+                    <div class="iconBx">
+                     <i class="fa-solid fa-capsules"></i>
+                    </div>
+                </div>
+             <div class="card">
+                    <div>
+                        <div class="numbers">{{ total_cliente }}</div>
+                        <div class="cardName">Clientes</div>
+                    </div>
+
+                    <div class="iconBx">
+                     <ion-icon name="people-outline"></ion-icon>
+                    </div>
+                </div>
+             <div class="card">
+                    <div>
+                        <div class="numbers">{{ total_distribuidora }}</div>
+                        <div class="cardName">Distribuidora</div>
+                    </div>
+
+                    <div class="iconBx">
+                     <ion-icon name="business-sharp"></ion-icon>
+                    </div>
+                </div>
+
+            </div>
+
+
+{% endblock %}

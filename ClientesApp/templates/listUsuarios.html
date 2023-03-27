@@ -1,0 +1,76 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block titulo %}
+Listado de Usuarios
+{% endblock titulo %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/lib/datatable/dataTables.bootstrap.min.css' %}">
+{% endblock extra_css %}
+{% block body %}
+    <section id="container">
+
+		<h1><i class="fa-solid fa-users fa-2x" style="color: #0ca4ce"></i> Lista de usuarios</h1>
+		<a href="{% url 'CrearUsuario' %}" class="btn_new"><i class="fas fa-user-plus "></i> Crear usuario</a>
+
+		<form action="" method="get" class="form_search">
+			<input type="text" name="busqueda" id="busqueda" value="{{ request.GET.busqueda }}" placeholder="Buscar" >
+			 <button type="submit" class="btn_search" ><i class="fas fa-search"></i></button>
+		</form>
+    <table id="tabla_trabajadores" class="table">
+                <thead>
+                    <tr>
+                        <th class="centered" >#</th>
+                        <th class="centered">Nombres</th>
+                        <th class="centered" >Usuario</th>
+                        <th class="centered" >estado</th>
+                        <th class="centered" >Opciones</th>
+                    </tr>
+                </thead>
+               <tbody id="table_programer">
+               {% for i in entity %}
+                  <tr>
+                  <td class="centered" >{{ i.id }}</td>
+                   <td class="centered" >{{ i.nombres }}</td>
+                  <td class="centered" >{{ i.usuario }}</td>
+                  <td class="centered" >
+                      {% if i.estado == True %}
+                          <i class='fa-solid fa-check fa-xl' style='color: green'></i>
+                      {% else %}
+                          <i class='fa-solid fa-xmark fa-xl' style='color: red'></i>
+                      {% endif %}
+                  </td>
+                   {% if i.estado == 1 %}
+                 <th  class="centered" >
+                     <a href="{% url 'editar_usuario' i.id%}">
+                     <button class="btn btn-outline-primary btn-sm">
+                     <i class="fas fa-user-pen"></i>
+                    </button>
+                 </a>
+                     <a href="{% url 'eliminar_usuario' i.id %}">
+                          <button class="btn btn-outline-danger btn-sm">
+                          <i class="fas fa-trash"></i></button>
+                     </a>
+                 </th>
+                      {% else %}
+                      <th  class="centered" >
+                     <a href="{% url 'editar_usuario' i.id%}">
+                     <button class="btn btn-outline-primary btn-sm">
+                     <i class="fas fa-user-pen"></i>
+                    </button>
+                 </a>
+                      </th>
+                  {% endif %}
+                </tr>
+              {% endfor %}
+               </tbody>
+            </table>
+     <div>
+                {% include 'paginator.html' %}
+            </div>
+	</section>
+{% endblock body %}
+{% block extrajs %}
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="{% static 'js/lib/data-table/dataTables.bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/usuarios/index.js' %}"></script>
+{% endblock extrajs %}

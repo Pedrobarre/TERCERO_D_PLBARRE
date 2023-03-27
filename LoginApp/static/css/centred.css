@@ -1,0 +1,15 @@
+.centered{
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+.trans{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+.trans button{
+    margin: 10px;
+}
+.trans a{
+    margin-bottom: 15px;
+}
